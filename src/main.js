@@ -27,13 +27,13 @@ export function handlerSearchForm(e) {
     });
     return;
   }
-
-  const result = getImagesByQuery(searchText);
   showLoader();
+  const result = getImagesByQuery(searchText);
+
   result
     .then(response => {
-      console.log('response');
-      const imgs = response.data.hits;
+      clearGallery();
+      const imgs = response;
 
       if (imgs.length === 0) {
         iziToast.show({
@@ -43,8 +43,7 @@ export function handlerSearchForm(e) {
         });
         return;
       }
-      console.log(imgs.length);
-      clearGallery();
+
       createGallery(imgs);
     })
     .catch(error => {
@@ -54,7 +53,6 @@ export function handlerSearchForm(e) {
       });
     })
     .finally(data => {
-      console.log('finally');
       hideLoader();
     });
 }
