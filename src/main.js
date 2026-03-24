@@ -28,11 +28,11 @@ export function handlerSearchForm(e) {
     return;
   }
   showLoader();
+  clearGallery();
   const result = getImagesByQuery(searchText);
 
   result
     .then(response => {
-      clearGallery();
       const imgs = response;
 
       if (imgs.length === 0) {
